@@ -19,24 +19,36 @@ class Queue {
   }
 
   getUnderlyingList() {
-    return this.head;
+    return this.convertToObj(this.head);
+  }
+  convertToObj(node) {
+    if (!node) return null;
+    return {
+      value: node.value,
+      next: this.convertToObj(node.next),
+    };
   }
 
   enqueue(value) {
-    const newNode = new ListNode(value);
+    const node = new ListNode(value);
+
     if (!this.head) {
-      this.head = newNode;
-      this.tail = newNode;
+      this.head = node;
+      this.tail = node;
     } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
+      this.tail.next = node;
+      this.tail = node;
     }
   }
 
   dequeue() {
-    if (!this.head) return null;
+    if (!this.head) {
+      return undefined;
+    }
+
     const value = this.head.value;
     this.head = this.head.next;
+
     if (!this.head) {
       this.tail = null;
     }
