@@ -37,30 +37,43 @@ class BinarySearchTree {
       }
     }
   }
-
-  find(/* data */) {
-    // Remove line below and write your code here
-    throw new NotImplementedError("Not implemented");
+  find(data) {
+    return this.findNode(this.rootNode, data);
   }
-
-  has(/* data */) {
-    // Remove line below and write your code here
-    throw new NotImplementedError("Not implemented");
+  findNode(node, data) {
+    if (node === null) {
+      return null;
+    }
+    if (data < node.data) {
+      return this.findNode(node.left, data);
+    } else if (data > node.data) {
+      return this.findNode(node.right, data);
+    } else {
+      return node;
+    }
   }
-
+  has(data) {
+    return this.find(data) !== null;
+  }
   remove(/* data */) {
     // Remove line below and write your code here
     throw new NotImplementedError("Not implemented");
   }
-
   min() {
-    // Remove line below and write your code here
-    throw new NotImplementedError("Not implemented");
+    let current = this.rootNode;
+    if (current === null) return null;
+    while (current.left !== null) {
+      current = current.left;
+    }
+    return current.data;
   }
-
   max() {
-    // Remove line below and write your code here
-    throw new NotImplementedError("Not implemented");
+    let current = this.rootNode;
+    if (current === null) return null;
+    while (current.right !== null) {
+      current = current.right;
+    }
+    return current.data;
   }
 }
 
